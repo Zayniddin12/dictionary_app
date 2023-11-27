@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="output.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;500;600;700;800;900&family=Inika:wght@400;700&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="body font-Inter text-zinc-800 transition-all delay-150 ease-in-out duration-150" id="body">
+<div class="container w-full max-w-[1360px] my-0 ml-auto mr-auto px-4 sm:px-10">
+    <div class="navbar py-14 flex justify-between items-center">
+        <div class="logo">
+            <img src="imgApp/logo.svg" alt="">
+        </div>
+        <div class="nav_font_cont flex justify-between items-center gap-[10px] sm:gap-[26px] cursor-pointer">
+            <div class="fonts_cont relative flex justify-between items-center gap-3">
+                <div class="SansSerif  text-lg font-bold leading-normal">Sans Serif</div>
+                <i class="down fa-solid fa-chevron-down text-violet-600 cursor-pointer"></i>
+                <div class="modal__fonts hidden absolute top-[25px] bg-slate-900 text-white p-2 rounded-[3px] transition-all delay-150 ease-in-out duration-150" onfocusout="Focus_Out(event)">
+                    <div class="san_serif hidden cursor-pointer hover:underline">Sans Serif</div>
+                    <div class="serif cursor-pointer hover:underline">serif</div>
+                    <div class="monospace cursor-pointer hover:underline">monospace</div>
+                </div>
+            </div>
+            <div class="font_icon_cont w-px h-8 bg-gray-200"></div>
+            <div class="darkMode__navigation__icons w-20 h-5 relative" id="dark_mode_navigation"  onclick="darkModeNav()">
+                <div class="dark_mode w-10 h-5 left-0 top-0 absolute">
+                  <div class="back_dark w-10 h-5 left-0 top-0 absolute bg-neutral-500 rounded-lg transition-all delay-150 ease-in-out duration-150"></div>
+                  <div class="oval w-3.5 h-3.5 left-[3px] top-[3px] absolute bg-white rounded-full transition-all delay-150 ease-in-out duration-150"></div>
+                </div>
+               
+                <i class="fa-regular fa-moon moon w-5 h-5 left-16 top-0 absolute text-[#757575] transition-all delay-150 ease-in-out duration-150"></i>
+              </div>
+              
+        </div>
+    </div>
+    <form class="search_words py-5 px-6 flex justify-between items-center bg-[#F4F4F4] rounded-[16px] border-2 border-transparent focus-within:border-purple-500 focus-within:border-2">
+        <input name="word" type="text" placeholder="Search for any word…" class="form_input w-[90%] bg-transparent outline-none text-[20px] font-bold, placeholder:opacity-25 text-zinc-800 text-xl font-bold">
+        <button class="search_btn"><img class="cursor-pointer" src="imgApp/searchIcon.svg" alt=""></button>
+    </form>
+    <div class="WhoopsCanTBeEmp hidden text-rose-500 text-xl font-normal font-['Inter']">Whoops, can’t be empty…</div>
+    <div class="main_details">
+        <div class="keyboard_section my-[40px] flex justify-between items-center">
+            <div class="key_font">
+                <div class="keyboard text-3xl sm:text-6xl font-bold  mb-2">${data[0].word}</div>
+            <div class="KiBD text-purple-500 text-2xl font-normal ">${data[0].phonetic}</div>
+            </div>
+            <div class="key_icon"><a class="no-underline" href="${data[0].sourceUrls}"><img class="w-[48px] h-[48px], sm:w-[75px] h-[75px] cursor-pointer" src="imgApp/play.svg" alt=""></a></div>
+        </div>
+        <div class="key_type flex justify-between items-center gap-[10px] mb-[22px]">
+            <div class="Noun text-2xl font-bold">noun</div>
+            <div class="Rectangle1 w-full h-px bg-gray-200"></div>
+        </div>
+        <div class="meaning_section">
+            <div class="meaning__title text-neutral-500 text-xl font-normal mb-[25px]">Meaning</div>
+            <ul class="list-image-[url(imgApp/list_type.svg)] ml-5">
+                <li class="text-lg font-normal leading-normal mb-[13px]">(etc.) A set of keys used to operate a typewriter, computer etc.</li>
+                <li class="text-lg font-normal leading-normal mb-[13px]">A component of many instruments including the piano, organ, and harpsichord consisting of usually black and white keys that cause different tones to be produced when struck.</li>
+                <li class="text-lg font-normal leading-normal mb-[13px]">A device with keys of a musical keyboard, used to control electronic sound-producing devices which may be built into or separate from the keyboard device.</li>
+            </ul>
+            <div class="synonim_cont flex items-center gap-3 mt-16 mb-10">
+                <div class="syn_cont text-neutral-500 text-xl font-normal">Synonyms</div>
+                <div class="syn_keyboard text-purple-500 text-base sm:text-xl font-bold">electronic keyboard</div>
+            </div>
+        </div>
+        <div class="verb_section flex justify-between items-center gap-[10px] mb-10">
+            <div class="Verb text-2xl font-bold">verb</div>
+            <div class="Rectangle1 w-full h-px bg-gray-200"></div>
+        </div>
+        <div class="verb_meaning_sec">
+            <div class="meaning__title text-neutral-500 text-xl font-normal mb-[25px]">Meaning</div>
+        </div>
+        <ul class="list-image-[url(imgApp/list_type.svg)] ml-5">
+            <li class="text-lg font-normal leading-normal mb-[13px]">(etc.) A set of keys used to operate a typewriter, computer etc.
+                <div class="example  text-neutral-500 text-lg font-normal font-['Inter'] leading-normal">“Keyboarding is the part of this job I hate the most.”</div>
+            </li>
+        </ul>
+    </div>
+    <footer class="footer block sm:flex items-center gap-3 border-t-[1px] border-t-gray-200 py-5">
+        <span class="Source text-neutral-500 text-sm font-normal underline">Source:</span> <a href="#" class="text-sm font-normal underline">https://en.wiktionary.org/wiki/keyboard</a><img src="imgApp/link_icon.svg" class="cursor-pointer" alt="">
+   </footer>
+   
+</div>
+<script src="dictionary.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
