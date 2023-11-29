@@ -9,9 +9,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;500;600;700;800;900&family=Inika:wght@400;700&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+    *{
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+</style>
 </head>
 <body class="body font-Inter text-zinc-800 transition-all delay-150 ease-in-out duration-150" id="body">
-<div class="container w-full max-w-[1360px] my-0 ml-auto mr-auto px-4 sm:px-10">
+<div class="container z-10 w-full max-w-[1360px] my-0 ml-auto mr-auto px-4 sm:px-10">
     <div class="navbar py-14 flex justify-between items-center">
         <div class="logo">
             <img src="imgApp/logo.svg" alt="">
@@ -20,13 +27,13 @@
             <div class="fonts_cont relative flex justify-between items-center gap-3">
                 <div class="SansSerif  text-lg font-bold leading-normal">Sans Serif</div>
                 <i class="down fa-solid fa-chevron-down text-violet-600 cursor-pointer"></i>
-                <div class="modal__fonts hidden absolute top-[25px] bg-slate-900 text-white p-2 rounded-[3px] transition-all delay-150 ease-in-out duration-150" onfocusout="Focus_Out(event)">
-                    <div class="san_serif hidden cursor-pointer hover:underline">Sans Serif</div>
-                    <div class="serif cursor-pointer hover:underline">serif</div>
-                    <div class="monospace cursor-pointer hover:underline">monospace</div>
+                <div class="modal__fonts hidden absolute top-[25px] bg-white shadow-[0_35px_60px_-15px_rgba(0,0,0,0.15)] text-[#2D2D2D] p-2 rounded-[16px] transition-all delay-150 ease-in-out duration-150" onfocusout="Focus_Out(event)">
+                    <div class="san_serif font-sans cursor-pointer hover:text-[#A445ED]">Sans Serif</div>
+                    <div class="serif font-serif cursor-pointer hover:text-[#A445ED]">serif</div>
+                    <div class="monospace font-mono cursor-pointer hover:text-[#A445ED]">monospace</div>
                 </div>
             </div>
-            <div class="font_icon_cont w-px h-8 bg-gray-200"></div>
+            <div class="font_icon_cont w-px h-8 bg-gray-200 hover:cursor-pointer"></div>
             <div class="darkMode__navigation__icons w-20 h-5 relative" id="dark_mode_navigation"  onclick="darkModeNav()">
                 <div class="dark_mode w-10 h-5 left-0 top-0 absolute">
                   <div class="back_dark w-10 h-5 left-0 top-0 absolute bg-neutral-500 rounded-lg transition-all delay-150 ease-in-out duration-150"></div>
@@ -42,48 +49,54 @@
         <input name="word" type="text" placeholder="Search for any word…" class="form_input w-[90%] bg-transparent outline-none text-[20px] font-bold, placeholder:opacity-25 text-zinc-800 text-xl font-bold">
         <button class="search_btn"><img class="cursor-pointer" src="imgApp/searchIcon.svg" alt=""></button>
     </form>
-    <div class="WhoopsCanTBeEmp hidden text-rose-500 text-xl font-normal font-['Inter']">Whoops, can’t be empty…</div>
+    <div class="whoops hidden text-rose-500 text-xl font-normal font-['Inter']">Whoops, can’t be empty…</div>
     <div class="main_details">
-        <div class="keyboard_section my-[40px] flex justify-between items-center">
-            <div class="key_font">
-                <div class="keyboard text-3xl sm:text-6xl font-bold  mb-2">${data[0].word}</div>
-            <div class="KiBD text-purple-500 text-2xl font-normal ">${data[0].phonetic}</div>
-            </div>
-            <div class="key_icon"><a class="no-underline" href="${data[0].sourceUrls}"><img class="w-[48px] h-[48px], sm:w-[75px] h-[75px] cursor-pointer" src="imgApp/play.svg" alt=""></a></div>
-        </div>
-        <div class="key_type flex justify-between items-center gap-[10px] mb-[22px]">
-            <div class="Noun text-2xl font-bold">noun</div>
-            <div class="Rectangle1 w-full h-px bg-gray-200"></div>
-        </div>
-        <div class="meaning_section">
-            <div class="meaning__title text-neutral-500 text-xl font-normal mb-[25px]">Meaning</div>
-            <ul class="list-image-[url(imgApp/list_type.svg)] ml-5">
-                <li class="text-lg font-normal leading-normal mb-[13px]">(etc.) A set of keys used to operate a typewriter, computer etc.</li>
-                <li class="text-lg font-normal leading-normal mb-[13px]">A component of many instruments including the piano, organ, and harpsichord consisting of usually black and white keys that cause different tones to be produced when struck.</li>
-                <li class="text-lg font-normal leading-normal mb-[13px]">A device with keys of a musical keyboard, used to control electronic sound-producing devices which may be built into or separate from the keyboard device.</li>
-            </ul>
-            <div class="synonim_cont flex items-center gap-3 mt-16 mb-10">
-                <div class="syn_cont text-neutral-500 text-xl font-normal">Synonyms</div>
-                <div class="syn_keyboard text-purple-500 text-base sm:text-xl font-bold">electronic keyboard</div>
-            </div>
-        </div>
-        <div class="verb_section flex justify-between items-center gap-[10px] mb-10">
-            <div class="Verb text-2xl font-bold">verb</div>
-            <div class="Rectangle1 w-full h-px bg-gray-200"></div>
-        </div>
-        <div class="verb_meaning_sec">
-            <div class="meaning__title text-neutral-500 text-xl font-normal mb-[25px]">Meaning</div>
-        </div>
-        <ul class="list-image-[url(imgApp/list_type.svg)] ml-5">
-            <li class="text-lg font-normal leading-normal mb-[13px]">(etc.) A set of keys used to operate a typewriter, computer etc.
-                <div class="example  text-neutral-500 text-lg font-normal font-['Inter'] leading-normal">“Keyboarding is the part of this job I hate the most.”</div>
-            </li>
-        </ul>
+       
     </div>
-    <footer class="footer block sm:flex items-center gap-3 border-t-[1px] border-t-gray-200 py-5">
+    <div class="langInfo ">
+        <div class="nofound_section1  my-[10vh]  text-center">
+            <div class="smile text-6xl max-sm:mt-14  mb-[44px]">😊</div>
+            <div class=" text-xl font-bold font-['Inter'] mb-24px tracking-wide">I can find too many word definitions wich you wanted</div>
+            <div class=" text-neutral-500 text-lg font-normal font-Inter leading-normal">It is my first project so if you see some idea or unconvenient thing please write to links which located on the bottom of this site!</div>
+        </div>
+    </div>
+    <div class="nofound_section hidden  my-[10vh]  text-center">
+        <div class="smile text-6xl max-sm:mt-14  mb-[44px]">😕</div>
+        <div class=" text-xl font-bold font-['Inter'] mb-24px tracking-wide">No Definitions Found</div>
+        <div class=" text-neutral-500 text-lg font-normal font-Inter leading-normal">Sorry pal, we couldn't find definitions for the word you were looking for. You can try the search again at later time or head to the web instead.</div>
+    </div>
+    <div class="extra_sections grid  max-sm:grid-cols-1 max-md:grid-cols-2 gap-4 md:grid-cols-4 lg:gap-4 mb-10">
+        <a href="https://www.youtube.com/watch?v=g8q-Nq-ajx8&list=PLcetZ6gSk96-FECmH9l7Vlx5VDigvgZpt" target="_blank" class="extra__cont relative hover:shadow-md shadow-black/5 dark:shadow-black/30 hover:scale-105">
+         <img class="w-full h-[300px] rounded-[16px]" src="imgApp/listening.jpg" alt=""> 
+         <h3 class="hover:text-[#A445ED] hover:underline">If you want to develop your listening skills, in my opinion BBC learning inglish very useful for you!!!</h3>
+       </a>
+        <a href="https://www.thoughtco.com/important-words-in-english-1692687" target="_blank" class="extra__cont relative hover:shadow-md shadow-black/5 dark:shadow-black/30 hover:scale-105">
+           <img class="w-full h-[300px] rounded-[16px]" src="imgApp/vocabImmg.png" alt="">
+           <h3 class="hover:text-[#A445ED] hover:underline">If your vocabulary is not very well, this section only for you!!!</h3>
+        </a>
+        <a href="https://rafieienglishclinic.com/upload/blog/Oxford%20Word%20Skills/Oxford_Word_Skills_-_Intermediate.pdf" target="_blank" class="extra__cont relative hover:shadow-md shadow-black/5 dark:shadow-black/30 hover:scale-105">
+           <img class="w-full h-[300px] rounded-[16px]" src="imgApp/oxwordImg.png" alt="">
+           <h3 class="hover:text-[#A445ED] hover:underline">In too many universities you need learn oxword word skills, in my mind If you learn this section you will need not anydictionary apps !!! </h3>
+        </a>
+        <a href="https://ieltspracticeonline.com/264-collocations-for-ielts-speaking-band-8part-1/" target="_blank" class="extra__cont relative hover:shadow-md shadow-black/5 dark:shadow-black/30 hover:scale-105">
+           <img class="w-full h-[300px] rounded-[16px] " src="imgApp/colllacationImg.png" alt="">
+           <h3 class="hover:text-[#A445ED]  hover:underline">I believe that if you use different collocations in your speakings or writingings, you can show your great degree to other peaople!!!</h3>
+        </a>
+       </div>
+
+    <footer class="footer  block sm:flex items-center gap-3 border-t-[1px] border-t-gray-200 py-5 ">
         <span class="Source text-neutral-500 text-sm font-normal underline">Source:</span> <a href="#" class="text-sm font-normal underline">https://en.wiktionary.org/wiki/keyboard</a><img src="imgApp/link_icon.svg" class="cursor-pointer" alt="">
-   </footer>
-   
+   </footer> 
+</div>
+<div class="over_lay  fixed flex hidden items-center justify-center w-screen h-screen top-0 left-0 right-0 bottom-0  z-20 backdrop-blur-sm">
+    <div
+  class="inline-block  h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] text-white motion-reduce:animate-[spin_1.5s_linear_infinite]"
+  role="status">
+  <span
+    class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+    >Loading...</span
+  >
+</div>
 </div>
 <script src="dictionary.js"></script>
 <script src="app.js"></script>

@@ -78,100 +78,155 @@ serif.addEventListener('click', ()=>{
     body.classList.remove('font-Inter')
     body.classList.remove('font-Inconsolata')
     body.classList.add('font-Inika')
-    san_serif.classList.remove('hidden')
-    serif.classList.add('hidden')
-    monospace.classList.remove('hidden')
     modal__fonts.classList.add('hidden')
 })
 monospace.addEventListener('click', ()=>{
     body.classList.remove('font-Inter')
     body.classList.add('font-Inconsolata')
     body.classList.remove('font-Inika')
-    serif.classList.remove('hidden')
-    monospace.classList.add('hidden')
-    san_serif.classList.remove('hidden')
     modal__fonts.classList.add('hidden')
 })
 san_serif.addEventListener('click', ()=>{
     body.classList.add('font-Inter')
     body.classList.remove('font-Inconsolata')
     body.classList.remove('font-Inika')
-    san_serif.classList.add('hidden')
-    monospace.classList.remove('hidden')
-    serif.classList.remove('hidden')
     modal__fonts.classList.add('hidden')
 })
 
 
 
 // datadan malumot olish
+let overLay=document.querySelector('.over_lay ')
 
-
+function loader(state) {
+    if (state) {
+        overLay.classList.remove('hidden')
+    }else{
+        overLay.classList.add('hidden') 
+    }
+}
 
 const searchWords=document.querySelector('.search_words')
 const details=document.querySelector('.main_details')  
 
+let meaning 
+const getWord= async (city)=>{
+    const data =await getData(city)
+    getMeanings()
+   return meaning = data
+
+}
+console.log(meaning)
+function getMeanings(){
+   
+}
+
+let info = document.querySelector('.langInfo')
+let infoInner
+let definitions
+let sound=document.querySelector('.sound')
+let audio;
 
 
 function upDateUI(data ) {
+
+    
+
+    let  sinonyms 
     console.log(data[0]);
+    if(data !== null){
+        for (let i = 0; i <data[0].meanings.length; i++) {
+            console.log(data[0].meanings[i].partOfSpeech);
+            infoInner = document.createElement('div')
+            infoInner.classList.add('language')
+            infoInner.innerHTML = `<div class="key_type flex justify-between items-center gap-[10px] mb-[22px]">
+            <div class="Noun text-2xl font-bold">${data[0].meanings[i].partOfSpeech}</div>
+            <div class="Rectangle1 w-full h-px bg-gray-200"></div>
+        </div>
+        <div class="meaning_section">
+            <div class="meaning__title text-neutral-500 text-xl font-normal mb-[25px]">Meaning</div>
+        </div>` 
 
+            for (let e = 0; e <data[0].meanings[i].definitions.length; e++) {
+                definitions=document.createElement('div')
+                console.log(data[0].meanings[i].definitions[e].definition);
+                definitions.classList.add('definitions')
+                definitions.innerHTML=`
+                <ul class="definitions list-image-[url(imgApp/list_type.svg)] ml-5">
+                <li class="text-lg font-normal leading-normal mb-[13px]">${data[0].meanings[i].definitions[e].definition}</li>
+                </ul>
+                `
+               
+                infoInner.appendChild(definitions)
 
- console.log(data[0].meanings);
-    details.innerHTML=`<div class="keyboard_section my-[40px] flex justify-between items-center">
+            }
+          let synonimCont=document.createElement('div') 
+          synonimCont.setAttribute('class', 'synonim_box block md:flex items-center gap-3 mt-5 mb-5')
+        let syn_exapmles;
+
+                sinonyms=document.createElement('div')
+                sinonyms.classList.add('sinonims')
+                sinonyms.innerHTML=`
+                 <div class="syn_cont text-neutral-500 text-xl font-normal">Synonyms:</div>
+                 ` 
+                 synonimCont.appendChild(sinonyms) 
+                 console.log(data[0].meanings[i].synonyms.length);
+                for (let a = 0; a < data[0].meanings[i].synonyms.length; a++) {
+                    syn_exapmles=document.createElement('span')
+                    syn_exapmles.classList.add('syn_exapmles')
+                    syn_exapmles.innerHTML=`
+                    <div class="syn_keyboard text-purple-500 text-base sm:text-xl font-bold">${data[0].meanings[i].synonyms[a]}</div>
+                 `
+                 
+                synonimCont.appendChild(syn_exapmles)     
+                }
+                
+                    
+          
+              
+            infoInner.appendChild(synonimCont)
+            info.appendChild(infoInner)
+
+            
+            
+        }
+     
+    }
+    if (data[0].phonetic) {
+        details.innerHTML=`<div class="keyboard_section my-[40px] flex justify-between items-center">
         <div class="key_font">
             <div class="keyboard text-3xl sm:text-6xl font-bold  mb-2">${data[0].word}</div>
         <div class="KiBD text-purple-500 text-2xl font-normal ">${data[0].phonetic}</div>
         </div>
-        <div class="key_icon"><a href="${data[0].phonetics[0].audio}" class="no-underline"> ><img class="w-[48px] h-[48px], sm:w-[75px] h-[75px] cursor-pointer" src="imgApp/play.svg" alt=""></a></div>
+        <div class="key_icon"><img onclick=playSound() class="sound w-[48px] h-[48px], sm:w-[75px] h-[75px] cursor-pointer" src="imgApp/play.svg" alt=""></div>
     </div>
-
-
-
-        <div class="key_type flex justify-between items-center gap-[10px] mb-[22px]">
-        <div class="Noun text-2xl font-bold">daas</div>
-        <div class="Rectangle1 w-full h-px bg-gray-200"></div>
-    </div>
-    <div class="meaning_section">
-        <div class="meaning__title text-neutral-500 text-xl font-normal mb-[25px]">Meaning</div>
-        <ul class="list-image-[url(imgApp/list_type.svg)] ml-5">
-
-            <li class="text-lg font-normal leading-normal mb-[13px]">(etc.) A set of keys used to operate a typewriter, computer etc.</li>
-            <li class="text-lg font-normal leading-normal mb-[13px]">A component of many instruments including the piano, organ, and harpsichord consisting of usually black and white keys that cause different tones to be produced when struck.</li>
-            <li class="text-lg font-normal leading-normal mb-[13px]">A device with keys of a musical keyboard, used to control electronic sound-producing devices which may be built into or separate from the keyboard device.</li>
-        </ul>
-        <div class="synonim_cont flex items-center gap-3 mt-16 mb-10">
-            <div class="syn_cont text-neutral-500 text-xl font-normal">Synonyms</div>
-            <div class="syn_keyboard text-purple-500 text-base sm:text-xl font-bold">electronic keyboard</div>
+    ` 
+    } else {
+        details.innerHTML=`<div class="keyboard_section my-[40px] flex justify-between items-center">
+        <div class="key_font">
+            <div class="keyboard text-3xl sm:text-6xl font-bold  mb-2">${data[0].word}</div>
+        <div class="KiBD text-purple-500 text-2xl font-normal "></div>
         </div>
+        <div class="key_icon"><img onclick=playSound() class="sound w-[48px] h-[48px], sm:w-[75px] h-[75px] cursor-pointer" src="imgApp/play.svg" alt=""></div>
     </div>
+    ` 
+    }
+    for (let i = 0; i < data[0]?.phonetics.length; i++) {
+        if (!(data[0]?.phonetics[i].audio=='')){
+            audio=new Audio(data[0].phonetics[i].audio)  
+        }
+        
+    }
+ 
     
+}
 
-
-
-    <div class="verb_section flex justify-between items-center gap-[10px] mb-10">
-        <div class="Verb text-2xl font-bold">verb</div>
-        <div class="Rectangle1 w-full h-px bg-gray-200"></div>
-    </div>
-    <div class="verb_meaning_sec">
-        <div class="meaning__title text-neutral-500 text-xl font-normal mb-[25px]">Meaning</div>
-    </div>
-    <ul class="list-image-[url(imgApp/list_type.svg)] ml-5">
-        <li class="text-lg font-normal leading-normal mb-[13px]">(etc.) A set of keys used to operate a typewriter, computer etc.
-            <div class="example  text-neutral-500 text-lg font-normal font-['Inter'] leading-normal">“Keyboarding is the part of this job I hate the most.”</div>
-        </li>
-    </ul>
-    `
+function playSound() {
+    audio.play()
 }
 
 
-// aka tepadagi funksiyani icida bitta sectionni ajratip qoyganman wu iterate bop aylanishi kerak
-
-const getWord= async (city)=>{
-    const data =await getData(city)
-   return data
-}
-
+// href="${data[0].phonetics[0].audio}"
 
 ///searching words
 
@@ -181,11 +236,47 @@ const getWord= async (city)=>{
 
 searchWords.addEventListener('submit', (e)=>{
     e.preventDefault()
+    resetFunction()
     const wordName=searchWords.word.value.trim()
-    searchWords.reset()
-    console.log(wordName);
-    getWord(wordName).then((data)=>upDateUI(data))
+    const whoops=document.querySelector('.whoops')
+    if (!(wordName=='')) {
+        
+        whoops.classList.add('hidden')
+        console.log(wordName);
+        searchWords.reset()
+        console.log(wordName);
+        reloadFunc()
+         getWord(wordName).then((data)=>upDateUI(data)).catch((err)=>{noFoundFunc()}) 
+    }else{
+        searchWords.classList.remove('focus-within:border-purple-500')
+        searchWords.classList.add('focus-within:border-red-500')
+whoops.classList.remove('hidden')
+resetFunction()
+resetDeteails()
+    }
+ 
 })
-
-
-
+function resetFunction(){
+    info.innerHTML = ''
+    
+}
+let footer=document.querySelector('.footer')
+function resetDeteails() {
+    details.innerHTML=''
+    footer.classList.remove('border-t-[1px]')
+    footer.innerHTML=''
+}
+let noFound=document.querySelector('.nofound_section')
+function noFoundFunc() {
+    details.innerHTML=''
+    noFound.classList.remove('hidden')
+    footer.classList.remove('border-t-[1px]')
+    footer.innerHTML=''
+    console.log('error');
+}
+function reloadFunc() {
+    noFound.classList.add('hidden')
+  
+    console.log('then');
+}
+// 25
